@@ -288,10 +288,16 @@ planner_server:
     use_sim_time: True
     planner_plugins: ["GridBased"]
     GridBased:
-      plugin: "nav2_navfn_planner/NavfnPlanner"
-      tolerance: 0.5
-      use_astar: false
-      allow_unknown: true
+      plugin: "drive_by_pickup_nav2_plugin/DriveBy"
+      interpolation_resolution: 0.1
+        # plugin: "nav2_straightline_planner/StraightLine"
+        # interpolation_resolution: 0.1
+      # plugin: "nav2_navfn_planner/NavfnPlanner"
+      # tolerance: 0.5
+      # use_astar: false
+      # allow_unknown: true
+
+
 
 smoother_server:
   ros__parameters:
