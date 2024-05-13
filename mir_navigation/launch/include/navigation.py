@@ -118,7 +118,7 @@ def generate_launch_description():
         description='Define cmd_vel topic')
 
     declare_bt_nav_cmd = DeclareLaunchArgument(
-        'default_nav_to_pose_bt_xml', default_value='')
+        'default_nav_to_pose_bt_xml', default_value=f'{mir_nav_dir}/behavior_trees/navigate_in_straight_line_bt.xml')
 
     declare_bt_nav_through_cmd = DeclareLaunchArgument(
         'default_nav_through_pose_bt_xml', default_value='')
