@@ -58,15 +58,15 @@ def generate_launch_description():
                 default_value='true',
                 description='Set to true to publish tf using mir_description',
             ),
-            IncludeLaunchDescription(
-                FrontendLaunchDescriptionSource(
-                    os.path.join(mir_description_dir, 'launch', 'robot_state_publisher.launch')
-                ),
-                launch_arguments={
-                    'tf_prefix': LaunchConfiguration('namespace'),
-                }.items(),
-                condition=IfCondition(LaunchConfiguration('robot_state_publisher_enabled')),
-            ),
+            #IncludeLaunchDescription(
+            #    FrontendLaunchDescriptionSource(
+            #        os.path.join(mir_description_dir, 'launch', 'robot_state_publisher.launch')
+            #    ),
+            #    launch_arguments={
+            #        'tf_prefix': LaunchConfiguration('namespace'),
+            #    }.items(),
+            #    condition=IfCondition(LaunchConfiguration('robot_state_publisher_enabled')),
+            #),
             Node(
                 package='mir_driver',
                 executable='mir_bridge',

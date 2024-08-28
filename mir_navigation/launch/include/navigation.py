@@ -13,6 +13,8 @@
 # limitations under the License.
 
 import os
+from typing import List
+import time
 
 from ament_index_python.packages import get_package_share_directory
 
@@ -40,7 +42,8 @@ def generate_launch_description():
     use_respawn = LaunchConfiguration('use_respawn')
     log_level = LaunchConfiguration('log_level')
     default_nav_to_pose_bt_xml = LaunchConfiguration('default_nav_to_pose_bt_xml')
-    default_nav_through_pose_bt_xml = LaunchConfiguration('default_nav_through_pose_bt_xml')
+    default_nav_through_poses_bt_xml = LaunchConfiguration('default_nav_through_poses_bt_xml')
+    
 
     lifecycle_nodes = ['controller_server',
                        'smoother_server',
@@ -61,12 +64,14 @@ def generate_launch_description():
     remappings = [('/tf', 'tf'),
                   ('/tf_static', 'tf_static')]
 
-    # Create our own temporary YAML files that include substitutions
+    # create our own temporary yaml files that include substitutions
     param_substitutions = {
         'use_sim_time': use_sim_time,
         'autostart': autostart,
         'default_nav_to_pose_bt_xml': default_nav_to_pose_bt_xml,
-        'default_nav_through_poses_bt_xml': default_nav_through_pose_bt_xml
+        'default_nav_through_poses_bt_xml': default_nav_through_poses_bt_xml
+
+
     }
 
     configured_params = RewrittenYaml(
@@ -118,10 +123,10 @@ def generate_launch_description():
         description='Define cmd_vel topic')
 
     declare_bt_nav_cmd = DeclareLaunchArgument(
-        'default_nav_to_pose_bt_xml', default_value='')
+        'default_nav_to_pose_bt_xml', default_value=f'{mir_nav_dir}/behavior_trees/navigate_in_straight_line_bt.xml')
 
     declare_bt_nav_through_cmd = DeclareLaunchArgument(
-        'default_nav_through_pose_bt_xml', default_value='')
+        'default_nav_through_poses_bt_xml', default_value=f'{mir_nav_dir}/behavior_trees/navigate_through_poses_bt.xml')
 
     def add_prefix_to_cmd_vel(context):
         topic = context.launch_configurations['cmd_vel_topic']
@@ -131,7 +136,28 @@ def generate_launch_description():
         except KeyError:
             pass
         return [SetLaunchConfiguration('cmd_vel_w_prefix', topic)]
-
+    
+    def print_params(context):
+        print("--------configured params----------")
+        print(configured_params.__dict__)
+        for key in configured_params.__dict__:
+            print(f"\n--- {key}\n")
+            items = configured_params.__dict__[key]
+            # print(items)
+            if key == '_RewrittenYaml__source_file':
+                print(key)
+                print(items[0].__dict__)
+            if key == '_RewrittenYaml__param_rewrites':
+                print(key)
+                for inner_key in items:
+                    print(f"\t inner_key: {inner_key}")
+                    print(f"\t \t {items[inner_key]}")
+                    print(f"\t \t {items[inner_key][0].__dict__}")
+            if key == '_RewrittenYaml__key_rewrites':
+                print(items)
+     
+        print("---------------end-----------------")
+        # time.sleep(10)
     load_nodes = GroupAction(
         condition=IfCondition(PythonExpression(['not ', use_composition])),
         actions=[
@@ -182,7 +208,7 @@ def generate_launch_description():
                 respawn=use_respawn,
                 respawn_delay=2.0,
                 parameters=[configured_params],
-                arguments=['--ros-args', '--log-level', log_level],
+                arguments=['--ros-args', '--log-level', 'info'],
                 remappings=remappings),
             Node(
                 package='nav2_waypoint_follower',
@@ -293,6 +319,7 @@ def generate_launch_description():
     ld.add_action(declare_bt_nav_cmd)
     ld.add_action(declare_bt_nav_through_cmd)
     ld.add_action(OpaqueFunction(function=add_prefix_to_cmd_vel))
+    ld.add_action(OpaqueFunction(function=print_params))
     # Add the actions to launch all of the navigation nodes
     ld.add_action(load_nodes)
     ld.add_action(load_composable_nodes)

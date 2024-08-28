@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro"
+       name="mir" >
+
+  <!-- MiR base -->
+  <xacro:include filename="$(find mir_description)/urdf/include/mir_v1.urdf.xacro" />
+  <xacro:include filename="$(find mir_description)/urdf/include/common.gazebo.xacro" />
+  <xacro:include filename="$(find mir_description)/urdf/include/mir.gazebo.xacro" />
+
+  <xacro:arg name="tf_prefix" default="" />
+
+  <!-- prefix can not start with a slash like a global namespace! results in TF errors -->
+  <xacro:property name="ns" value="$(arg tf_prefix)" />
+  <xacro:if value="${ns == ''}">
+    <xacro:property name="prefix" value="" />
+  </xacro:if>
+  <xacro:unless value="${ns == ''}">
+    <xacro:property name="prefix" value="${ns}/" />
+  </xacro:unless>
+
+  <xacro:mir prefix="${prefix}" ns="${ns}"/>
+
+  <xacro:diff_controller_plugin_gazebo prefix="${prefix}" ns="${ns}"
+    left_wheel_joint="${prefix}left_wheel_joint"
+    right_wheel_joint="${prefix}right_wheel_joint"
+    wheel_separation="${2*mir_act_wheel_dy}"
+    wheel_radius="${mir_act_wheel_radius}"/>
+</robot>
