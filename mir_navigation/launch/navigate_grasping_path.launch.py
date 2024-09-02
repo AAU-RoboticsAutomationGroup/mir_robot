@@ -44,6 +44,7 @@ def generate_launch_description():
     mir_nav_dir = get_package_share_directory('mir_navigation')
     little_helper_state_publisher_dir = get_package_share_directory('little_helper_urdf')
     ur_driver_dir = get_package_share_directory('ur_robot_driver')
+    wsg50_driver_dir = get_package_share_directory('wsg_ctrl')
     
     # Launch arguments for the UR Driver
     launch_arg_ur = {
@@ -112,6 +113,9 @@ def generate_launch_description():
     
     launch_ur_driver = IncludeLaunchDescription(PythonLaunchDescriptionSource(os.path.join(ur_driver_dir, 'launch', 'ur_control.launch.py')), launch_arguments=launch_arg_ur
     )
+    
+    launch_wsg50_driver = IncludeLaunchDescription(PythonLaunchDescriptionSource(os.path.join(wsg50_driver_dir, 'wsg.launch.py'))
+    )
 
     ld = LaunchDescription()
 
@@ -126,5 +130,6 @@ def generate_launch_description():
     ld.add_action(launch_amcl)
     ld.add_action(launch_navigation)
     ld.add_action(launch_ur_driver)
+    ld.add_action(launch_wsg50_driver)
 
     return ld
