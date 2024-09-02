@@ -251,7 +251,7 @@ local_costmap:
       height: 3
       resolution: 0.05
       # offset: front / back from base_link
-      footprint: '[[0.388,-0.193],[0.388,0.193],[-0.312,0.193],[-0.312,-0.193]]'
+      footprint: '[[0.288,-0.093],[0.288,0.093],[-0.212,0.093],[-0.212,-0.093]]'
       footprint_padding: 0.01
       plugins: ["voxel_layer", "inflation_layer"]
       inflation_layer:
