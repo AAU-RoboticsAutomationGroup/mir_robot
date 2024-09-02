@@ -1,4 +1,6 @@
 <?xml version="1.0" ?>
+<!--
+
 <launch>
   <arg name="mir_type"  default="mir_100" description="The MiR variant. Can be 'mir_100' or 'mir_250' for now." />
   <arg name="tf_prefix" default="" description="TF prefix to use for all of the MiR's TF frames"/>
@@ -7,3 +9,5 @@
     <param name="robot_description" value="$(command 'xacro $(find-pkg-share mir_description)/urdf/mir.urdf.xacro mir_type:=$(var mir_type) tf_prefix:=$(var tf_prefix)')" />
   </node>
 </launch>
+
+-->

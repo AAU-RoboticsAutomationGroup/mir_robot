@@ -1,5 +1,5 @@
 repositories:
   ira_laser_tools:
     type: git
-    url: https://github.com/relffok/ira_laser_tools.git
+    url: https://github.com/EliasTDam/ira_laser_tools.git
     version: galactic-devel

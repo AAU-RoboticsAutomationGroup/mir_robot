@@ -66,7 +66,13 @@ qos_profile_latching = QoSProfile(
     durability=QoSDurabilityPolicy.TRANSIENT_LOCAL,
     reliability=QoSReliabilityPolicy.RELIABLE,
 )
-
+class TimeFilter():
+    def __init__(self):
+        self.prev_time = 0
+    def test_time(self, time):
+        result = time < self.prev_time
+        self.prev_time = time 
+        return result
 
 class TopicConfig(object):
     def __init__(self, topic, topic_type, topic_renamed=None, dict_filter=None, qos_profile=None):
@@ -94,7 +100,7 @@ def _diagnostic_array_dict_filter(msg_dict, to_ros2):
 
 def _diagnostic_status_dict_filter(msg_dict, to_ros2):
     filtered_msg_dict = copy.deepcopy(msg_dict)
-    print(filtered_msg_dict['level'] % 256)
+    # print(filtered_msg_dict['level'] % 256)
     filtered_msg_dict['level'] = bytes([filtered_msg_dict['level'] % 256])
     return filtered_msg_dict
 
@@ -198,7 +204,7 @@ def _convert_ros_header(header_msg_dict, to_ros2):
     return header_dict
 
 
-def _prepend_tf_prefix_dict_filter(msg_dict):
+def _prepend_tf_prefix_dict_filter(msg_dict, node_handle, time_filter):
     # filtered_msg_dict = copy.deepcopy(msg_dict)
     if not isinstance(msg_dict, dict):  # can happen during recursion
         return
@@ -217,11 +223,27 @@ def _prepend_tf_prefix_dict_filter(msg_dict):
                 pass  # value is not a dict
             except KeyError:
                 pass  # value doesn't have key 'frame_id'
+        if key == 'header':
+            #trying to update the time stamp as the mir robot is often behind
+            try:
+                # print(f"setting new time on {value['frame_id']}")
+                
+                if time_filter.test_time(value['stamp']['secs']):
+                    node_handle.get_logger().warn("the timings are mixed up from the MiR")
+                                
+                #print(value['stamp'])
+                value['stamp']['secs'] = node_handle.get_clock().now().to_msg().sec
+                value['stamp']['nsecs'] = node_handle.get_clock().now().to_msg().nanosec
+                # value['stamp'] = node_handle.get_clock().now().to_msg()
+            except Exception as e:
+                pass
+                # print(e)
+
         elif isinstance(value, dict):
-            _prepend_tf_prefix_dict_filter(value)
+            _prepend_tf_prefix_dict_filter(value, node_handle, time_filter)
         elif isinstance(value, Iterable):  # an Iterable other than dict (e.g., a list)
             for item in value:
-                _prepend_tf_prefix_dict_filter(item)
+                _prepend_tf_prefix_dict_filter(item, node_handle, time_filter)
     return msg_dict
 
 
@@ -241,6 +263,7 @@ def _remove_tf_prefix_dict_filter(msg_dict):
                 pass  # value is not a dict
             except KeyError:
                 pass  # value doesn't have key 'frame_id'
+       
         elif isinstance(value, dict):
             _remove_tf_prefix_dict_filter(value)
         elif isinstance(value, Iterable):  # an Iterable other than dict (e.g., a list)
@@ -452,6 +475,8 @@ SUB_TOPICS = [
 
 class PublisherWrapper(object):
     def __init__(self, topic_config, nh):
+        self.time_filter = TimeFilter()
+        self.node_handle = nh
         self.topic_config = topic_config
         self.robot = nh.robot
         self.connected = False
@@ -481,7 +506,7 @@ class PublisherWrapper(object):
     def callback(self, msg_dict):
         if not isinstance(msg_dict, dict):  # can happen during recursion
             return
-        msg_dict = _prepend_tf_prefix_dict_filter(msg_dict)
+        msg_dict = _prepend_tf_prefix_dict_filter(msg_dict, self.node_handle, self.time_filter)
         if self.topic_config.dict_filter is not None:
             msg_dict = self.topic_config.dict_filter(msg_dict, to_ros2=True)
         msg = message_converter.convert_dictionary_to_ros_message(self.topic_config.topic_type, msg_dict)

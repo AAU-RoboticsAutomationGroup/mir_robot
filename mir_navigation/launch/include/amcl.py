@@ -70,7 +70,7 @@ def generate_launch_description():
 
     declare_map_yaml_cmd = DeclareLaunchArgument(
         'map',
-        default_value=os.path.join(mir_nav_dir, 'maps', 'maze.yaml'),
+        default_value=os.path.join(mir_nav_dir, 'maps', 'workspace1_map.yaml'),
         description='Full path to map yaml file to load')
 
     declare_use_sim_time_cmd = DeclareLaunchArgument(
@@ -80,7 +80,7 @@ def generate_launch_description():
 
     declare_params_file_cmd = DeclareLaunchArgument(
         'params_file',
-        default_value=os.path.join(mir_nav_dir, 'config', 'mir_nav_params.yaml'),
+        default_value=os.path.join(mir_nav_dir, 'config', 'nav_fortress_params.yaml'),
         description='Full path to the ROS2 parameters file to use for all launched nodes')
 
     declare_autostart_cmd = DeclareLaunchArgument(
