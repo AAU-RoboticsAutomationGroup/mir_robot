@@ -43,6 +43,14 @@ def generate_launch_description():
     mir_driver_dir = get_package_share_directory('mir_driver')
     mir_nav_dir = get_package_share_directory('mir_navigation')
     little_helper_state_publisher_dir = get_package_share_directory('little_helper_urdf')
+    ur_driver_dir = get_package_share_directory('ur_robot_driver')
+    
+    # Launch arguments for the UR Driver
+    launch_arg_ur = {
+        'ur_type': 'ur5',
+        'robot_ip': '192.168.12.148',
+        'reverse_ip': '192.168.12.18',
+    }.items()
 
     def find_map_file(context):
         map_arg = context.launch_configurations['map']
@@ -101,6 +109,9 @@ def generate_launch_description():
     launch_lh_state_publisher = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(os.path.join(little_helper_state_publisher_dir, 'launch', 'urdf_publisher.launch.py'))
     )
+    
+    launch_ur_driver = IncludeLaunchDescription(PythonLaunchDescriptionSource(os.path.join(ur_driver_dir, 'launch', 'ur_control.launch.py')), launch_arguments=launch_arg_ur
+    )
 
     ld = LaunchDescription()
 
@@ -114,5 +125,6 @@ def generate_launch_description():
     ld.add_action(start_driver_cmd)
     ld.add_action(launch_amcl)
     ld.add_action(launch_navigation)
+    ld.add_action(launch_ur_driver)
 
     return ld
