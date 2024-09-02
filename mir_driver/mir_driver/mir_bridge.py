@@ -100,7 +100,7 @@ def _diagnostic_array_dict_filter(msg_dict, to_ros2):
 
 def _diagnostic_status_dict_filter(msg_dict, to_ros2):
     filtered_msg_dict = copy.deepcopy(msg_dict)
-    print(filtered_msg_dict['level'] % 256)
+    # print(filtered_msg_dict['level'] % 256)
     filtered_msg_dict['level'] = bytes([filtered_msg_dict['level'] % 256])
     return filtered_msg_dict
 
@@ -236,7 +236,8 @@ def _prepend_tf_prefix_dict_filter(msg_dict, node_handle, time_filter):
                 value['stamp']['nsecs'] = node_handle.get_clock().now().to_msg().nanosec
                 # value['stamp'] = node_handle.get_clock().now().to_msg()
             except Exception as e:
-                print(e)
+                pass
+                # print(e)
 
         elif isinstance(value, dict):
             _prepend_tf_prefix_dict_filter(value, node_handle, time_filter)

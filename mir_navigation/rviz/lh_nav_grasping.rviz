@@ -6,7 +6,6 @@ Panels:
       Expanded:
         - /Global Options1
         - /Status1
-        - /RobotModel1
         - /Map1
         - /Map1/Topic1
         - /Map2
@@ -20,6 +19,8 @@ Panels:
         - /Path1/Topic1
         - /Path2
         - /Path2/Topic1
+        - /RobotModel1
+        - /RobotModel1/Status1
       Splitter Ratio: 0.5
     Tree Height: 839
   - Class: rviz_common/Selection
@@ -61,141 +62,6 @@ Visualization Manager:
       Plane Cell Count: 10
       Reference Frame: <Fixed Frame>
       Value: true
-    - Alpha: 1
-      Class: rviz_default_plugins/RobotModel
-      Collision Enabled: false
-      Description File: ""
-      Description Source: Topic
-      Description Topic:
-        Depth: 5
-        Durability Policy: Volatile
-        History Policy: Keep Last
-        Reliability Policy: Reliable
-        Value: /robot_description
-      Enabled: true
-      Links:
-        All Links Enabled: true
-        Expand Joint Details: false
-        Expand Link Details: false
-        Expand Tree: false
-        Link Tree Style: Links in Alphabetic Order
-        b_laser_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        base_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        bl_caster:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        bl_wheel:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        br_caster:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        br_wheel:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        chassis:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        closset:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        f_laser_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        fl_caster:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        fl_wheel:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        forearm_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        fr_caster:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        fr_wheel:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        imu_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        l_act_wheel:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        r_act_wheel:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        shoulder_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        upper_arm_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        wrist_1_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        wrist_2_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        wrist_3_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-      Mass Properties:
-        Inertia: false
-        Mass: false
-      Name: RobotModel
-      TF Prefix: little_helper
-      Update Interval: 0
-      Value: true
-      Visual Enabled: true
     - Alpha: 0.699999988079071
       Class: rviz_default_plugins/Map
       Color Scheme: map
@@ -298,63 +164,63 @@ Visualization Manager:
       Frame Timeout: 15
       Frames:
         All Enabled: true
+        back_laser_link:
+          Value: true
+        base:
+          Value: true
+        base_footprint:
+          Value: true
         base_link:
           Value: true
-        item:
+        base_link_inertia:
           Value: true
-        little_helper/b_laser_link:
+        bl_caster_rotation_link:
           Value: true
-        little_helper/b_laser_link/gpu_lidar:
+        bl_caster_wheel_link:
           Value: true
-        little_helper/base_link:
+        br_caster_rotation_link:
           Value: true
-        little_helper/bl_caster:
+        br_caster_wheel_link:
           Value: true
-        little_helper/bl_wheel:
+        fl_caster_rotation_link:
           Value: true
-        little_helper/br_caster:
+        fl_caster_wheel_link:
           Value: true
-        little_helper/br_wheel:
+        flange:
           Value: true
-        little_helper/chassis:
+        fr_caster_rotation_link:
           Value: true
-        little_helper/closset:
+        fr_caster_wheel_link:
           Value: true
-        little_helper/f_laser_link:
+        front_laser_link:
           Value: true
-        little_helper/f_laser_link/gpu_lidar:
+        imu_frame:
           Value: true
-        little_helper/fl_caster:
+        imu_link:
           Value: true
-        little_helper/fl_wheel:
+        left_wheel_link:
           Value: true
-        little_helper/forearm_link:
-          Value: true
-        little_helper/fr_caster:
-          Value: true
-        little_helper/fr_wheel:
-          Value: true
-        little_helper/imu_link:
-          Value: true
-        little_helper/l_act_wheel:
-          Value: true
-        little_helper/odom:
-          Value: true
-        little_helper/r_act_wheel:
-          Value: true
-        little_helper/shoulder_link:
-          Value: true
-        little_helper/upper_arm_link:
-          Value: true
-        little_helper/wrist_1_link:
-          Value: true
-        little_helper/wrist_2_link:
-          Value: true
-        little_helper/wrist_3_link:
+        lh_10_body_link:
           Value: true
         map:
           Value: true
+        odom:
+          Value: true
+        right_wheel_link:
+          Value: true
+        surface:
+          Value: true
+        tool0:
+          Value: true
+        ur5_base_link:
+          Value: true
+        us_1_frame:
+          Value: true
+        us_2_frame:
+          Value: true
         virtual_laser_link:
+          Value: true
+        wrist_3_link:
           Value: true
       Marker Scale: 1
       Name: TF
@@ -363,47 +229,45 @@ Visualization Manager:
       Show Names: true
       Tree:
         map:
-          item:
-            {}
-          little_helper/odom:
-            little_helper/chassis:
+          odom:
+            base_footprint:
               base_link:
-                {}
-              little_helper/b_laser_link:
-                little_helper/b_laser_link/gpu_lidar:
+                back_laser_link:
                   {}
-              little_helper/bl_caster:
-                little_helper/bl_wheel:
+                bl_caster_rotation_link:
+                  bl_caster_wheel_link:
+                    {}
+                br_caster_rotation_link:
+                  br_caster_wheel_link:
+                    {}
+                fl_caster_rotation_link:
+                  fl_caster_wheel_link:
+                    {}
+                fr_caster_rotation_link:
+                  fr_caster_wheel_link:
+                    {}
+                front_laser_link:
                   {}
-              little_helper/br_caster:
-                little_helper/br_wheel:
+                imu_link:
+                  imu_frame:
+                    {}
+                left_wheel_link:
                   {}
-              little_helper/closset:
-                little_helper/base_link:
-                  little_helper/shoulder_link:
-                    little_helper/upper_arm_link:
-                      little_helper/forearm_link:
-                        little_helper/wrist_1_link:
-                          little_helper/wrist_2_link:
-                            little_helper/wrist_3_link:
-                              {}
-              little_helper/f_laser_link:
-                little_helper/f_laser_link/gpu_lidar:
+                right_wheel_link:
                   {}
-              little_helper/fl_caster:
-                little_helper/fl_wheel:
+                surface:
+                  lh_10_body_link:
+                    ur5_base_link:
+                      base:
+                        {}
+                      base_link_inertia:
+                        {}
+                us_1_frame:
                   {}
-              little_helper/fr_caster:
-                little_helper/fr_wheel:
+                us_2_frame:
                   {}
-              little_helper/imu_link:
-                {}
-              little_helper/l_act_wheel:
-                {}
-              little_helper/r_act_wheel:
-                {}
-              virtual_laser_link:
-                {}
+                virtual_laser_link:
+                  {}
       Update Interval: 0
       Value: true
     - Alpha: 1
@@ -462,6 +326,181 @@ Visualization Manager:
         Reliability Policy: Best Effort
         Value: /grasping_path
       Value: true
+    - Alpha: 1
+      Class: rviz_default_plugins/RobotModel
+      Collision Enabled: false
+      Description File: ""
+      Description Source: Topic
+      Description Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /robot_description
+      Enabled: true
+      Links:
+        All Links Enabled: true
+        Expand Joint Details: false
+        Expand Link Details: false
+        Expand Tree: false
+        Link Tree Style: Links in Alphabetic Order
+        back_laser_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        base:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        base_footprint:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        base_link_inertia:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        bl_caster_rotation_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        bl_caster_wheel_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        br_caster_rotation_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        br_caster_wheel_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        fl_caster_rotation_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        fl_caster_wheel_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        flange:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        forearm_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        fr_caster_rotation_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        fr_caster_wheel_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        front_laser_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        imu_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        imu_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        left_wheel_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        lh_10_body_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_wheel_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        shoulder_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        surface:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        tool0:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        upper_arm_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        ur5_base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        us_1_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        us_2_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        virtual_laser_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        wrist_1_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        wrist_2_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        wrist_3_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+      Mass Properties:
+        Inertia: false
+        Mass: false
+      Name: RobotModel
+      TF Prefix: ""
+      Update Interval: 0
+      Value: true
+      Visual Enabled: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -508,7 +547,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 25.05927848815918
+      Distance: 8.43217945098877
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -523,10 +562,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 1.1597967147827148
+      Pitch: 0.9547969102859497
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 5.953585624694824
+      Yaw: 0.5854146480560303
     Saved: ~
 Window Geometry:
   Displays:
