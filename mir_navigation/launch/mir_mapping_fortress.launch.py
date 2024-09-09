@@ -56,8 +56,14 @@ def generate_launch_description():
             name='rviz2',
             arguments=['-d', os.path.join(mir_nav_dir, 'rviz', 'fortress_mapping.rviz')]
         )
+
+    telop = Node(
+                package='teleop_twist_keyboard',
+                executable='teleop_twist_keyboard',
+                prefix='xterm -e')
     
     
     return LaunchDescription([mapping,
                               laser_scan_merger,
-                              rviz2])
+                              rviz2,
+                              telop])
