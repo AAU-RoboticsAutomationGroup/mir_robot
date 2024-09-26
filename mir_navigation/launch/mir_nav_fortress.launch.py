@@ -65,7 +65,7 @@ def generate_launch_description():
 
     declare_map_file_argument = DeclareLaunchArgument(
         'map',
-        default_value=os.path.join(mir_nav_dir, 'maps', 'workspace1_map.yaml'),
+        default_value=os.path.join(mir_nav_dir, 'maps','fib14_inmotiongrasping1e.yaml'),
         description='Relative path to map in mir_navigation/maps or full path to map (yaml).',
     )
 
