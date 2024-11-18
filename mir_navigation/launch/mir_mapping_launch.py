@@ -41,8 +41,10 @@ from ament_index_python.packages import get_package_share_directory
 def generate_launch_description():
 
     mir_driver_dir = get_package_share_directory('mir_driver')
-    mir_nav_dir = get_package_share_directory('mir_navigation')
+    mir_nav_dir= get_package_share_directory('mir_navigation')    
+    little_helper_state_publisher_dir = get_package_share_directory('little_helper_urdf')
 
+    
     def declare_rviz_config(context):
         nav_enabled = context.launch_configurations['navigation_enabled']
         if nav_enabled == 'true':
@@ -87,6 +89,11 @@ def generate_launch_description():
         condition=IfCondition(LaunchConfiguration('navigation_enabled')),
         launch_arguments={'map_subscribe_transient_local': 'true'}.items(),
     )
+    
+    launch_lh_state_publisher = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(os.path.join(little_helper_state_publisher_dir, 'launch', 'urdf_publisher.launch.py'))
+    )
+
 
     ld = LaunchDescription()
 
@@ -99,5 +106,6 @@ def generate_launch_description():
     ld.add_action(start_driver_cmd)
     ld.add_action(launch_mapping)
     ld.add_action(launch_navigation_if_enabled)
+    ld.add_action(launch_lh_state_publisher)
 
     return ld
