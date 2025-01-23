@@ -433,9 +433,9 @@ PUB_TOPICS = [
     # TopicConfig('robot_status', mir_msgs.msg.RobotStatus),
     # TopicConfig('/rosout', rosgraph_msgs.msg.Log),
     # TopicConfig('/rosout_agg', rosgraph_msgs.msg.Log),
-    TopicConfig(
-        'scan', sensor_msgs.msg.LaserScan, dict_filter=_header_dict_filter, qos_profile=qos_profile_sensor_data
-    ),
+    # TopicConfig(
+    #     'scan', sensor_msgs.msg.LaserScan, dict_filter=_header_dict_filter, qos_profile=qos_profile_sensor_data
+    # ),
     # TopicConfig('scan_filter/parameter_descriptions', dynamic_reconfigure.msg.ConfigDescription),
     # TopicConfig('scan_filter/parameter_updates', dynamic_reconfigure.msg.Config),
     TopicConfig('scan_filter/visualization_marker', visualization_msgs.msg.Marker, dict_filter=_marker_dict_filter),
@@ -610,15 +610,17 @@ class MiRBridgeNode(Node):
 
             topics.append([topic_name, topic_type, has_publishers, has_subscribers])
 
-        print('Publishers:')
+        # print('Publishers:')
         for (topic_name, topic_type, has_publishers, has_subscribers) in topics:
             if has_publishers:
-                print((' * %s [%s]' % (topic_name, topic_type)))
+                # print((' * %s [%s]' % (topic_name, topic_type)))
+                pass
 
-        print('\nSubscribers:')
+        # print('\nSubscribers:')
         for (topic_name, topic_type, has_publishers, has_subscribers) in topics:
             if has_subscribers:
-                print((' * %s [%s]' % (topic_name, topic_type)))
+                # print((' * %s [%s]' % (topic_name, topic_type)))
+                pass
 
         return topics
 
