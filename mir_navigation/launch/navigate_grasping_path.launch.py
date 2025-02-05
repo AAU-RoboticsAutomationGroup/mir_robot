@@ -78,7 +78,7 @@ def generate_launch_description():
 
     declare_rviz_config_file_argument = DeclareLaunchArgument(
         'rviz_config_file',
-        default_value=os.path.join(mir_nav_dir, 'rviz', 'nav_fortress.rviz'),
+        default_value=os.path.join(mir_nav_dir, 'rviz', 'nav_grasping_path_real.rviz'),
         description='Full path to rviz configuration file',
     )
 
