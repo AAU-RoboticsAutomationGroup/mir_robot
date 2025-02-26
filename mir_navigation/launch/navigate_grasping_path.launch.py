@@ -47,6 +47,7 @@ def generate_launch_description():
     wsg50_driver_dir = get_package_share_directory('wsg_ctrl')
     webui_dir = get_package_share_directory('grasping_navigator_web_ui')    
     little_helper_commander_dir = get_package_share_directory('little_helper_commander')
+    object_detection_dir = get_package_share_directory('object_detection_5g')
     # Launch arguments for the UR Driver
     launch_arg_ur = {
         'ur_type': 'ur5',
@@ -124,6 +125,8 @@ def generate_launch_description():
         PythonLaunchDescriptionSource(os.path.join(webui_dir, 'launch', 'webui.launch.py')),
         launch_arguments={'map': LaunchConfiguration('map_file')}.items(),
     ) 
+    launch_object_detection = IncludeLaunchDescription(PythonLaunchDescriptionSource(os.path.join(object_detection_dir, 'object_detection.launch.py'))
+    )
 
     ld = LaunchDescription()
 
@@ -141,5 +144,6 @@ def generate_launch_description():
     ld.add_action(launch_wsg50_driver)
     ld.add_action(launch_commander)
     ld.add_action(launch_webui)
+    ld.add_action(launch_object_detection)
 
     return ld
