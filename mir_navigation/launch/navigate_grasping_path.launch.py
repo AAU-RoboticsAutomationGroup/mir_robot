@@ -45,7 +45,8 @@ def generate_launch_description():
     little_helper_state_publisher_dir = get_package_share_directory('little_helper_urdf')
     ur_driver_dir = get_package_share_directory('ur_robot_driver')
     wsg50_driver_dir = get_package_share_directory('wsg_ctrl')
-    
+    webui_dir = get_package_share_directory('grasping_navigator_web_ui')    
+    little_helper_commander_dir = get_package_share_directory('little_helper_commander')
     # Launch arguments for the UR Driver
     launch_arg_ur = {
         'ur_type': 'ur5',
@@ -116,6 +117,13 @@ def generate_launch_description():
     
     launch_wsg50_driver = IncludeLaunchDescription(PythonLaunchDescriptionSource(os.path.join(wsg50_driver_dir, 'wsg.launch.py'))
     )
+    
+    launch_commander = IncludeLaunchDescription(PythonLaunchDescriptionSource(os.path.join(little_helper_commander_dir, 'launch', 'commander.launch.py')))
+
+    launch_webui = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(os.path.join(webui_dir, 'launch', 'webui.launch.py')),
+        launch_arguments={'map': LaunchConfiguration('map_file')}.items(),
+    ) 
 
     ld = LaunchDescription()
 
@@ -131,5 +139,7 @@ def generate_launch_description():
     ld.add_action(launch_navigation)
     ld.add_action(launch_ur_driver)
     ld.add_action(launch_wsg50_driver)
+    ld.add_action(launch_commander)
+    ld.add_action(launch_webui)
 
     return ld
