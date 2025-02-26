@@ -214,12 +214,12 @@ controller_server:
     FollowPath:
       plugin: "nav2_regulated_pure_pursuit_controller::RegulatedPurePursuitController"
       desired_linear_vel: 0.2
-      lookahead_dist: 0.6
+      lookahead_dist: 0.4
       min_lookahead_dist: 0.3
-      max_lookahead_dist: 0.9
-      lookahead_time: 1.5
+      max_lookahead_dist: 0.5
+      lookahead_time: 1.0
       rotate_to_heading_angular_vel: 0.8
-      transform_tolerance: 0.1
+      transform_tolerance: 0.2
       use_velocity_scaled_lookahead_dist: false
       min_approach_linear_velocity: 0.05
       approach_velocity_scaling_dist: 0.6
@@ -236,7 +236,7 @@ controller_server:
       rotate_to_heading_min_angle: 0.785
       max_angular_accel: 0.1
 
-      max_robot_pose_search_dist: 10.0
+      max_robot_pose_search_dist: 0.6
 
 local_costmap:
   local_costmap:
@@ -252,7 +252,7 @@ local_costmap:
       resolution: 0.05
       # offset: front / back from base_link
       footprint: '[[0.288,-0.093],[0.288,0.093],[-0.212,0.093],[-0.212,-0.093]]'
-      footprint_padding: 0.01
+      footprint_padding: 0.05
       plugins: ["voxel_layer", "inflation_layer"]
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
@@ -280,7 +280,7 @@ local_costmap:
           obstacle_min_range: 0.0
       static_layer:
         plugin: "nav2_costmap_2d::StaticLayer"
-        map_subscriae_transient_local: True
+        map_subscribe_transient_local: True
       always_send_full_costmap: True
 
 global_costmap:
@@ -293,7 +293,7 @@ global_costmap:
       use_sim_time: True
       # offset: front / back from base_link
       footprint: '[[0.388,-0.193],[0.388,0.193],[-0.312,0.193],[-0.312,-0.193]]'
-      footprint_padding: 0.01
+      footprint_padding: 0.10
       resolution: 0.05
       track_unknown_space: true
       plugins: ["static_layer", "obstacle_layer", "inflation_layer"]
